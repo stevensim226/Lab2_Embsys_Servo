@@ -14,9 +14,6 @@ void PWM_Init(void)
 	
 	/* Set Period */
 	TCC0.PER = 16000;
-
-	/* Set Compare Register value*/
-	TCC0.CCA = 1500;
 }
 
 
@@ -34,7 +31,7 @@ int main (void)
 		if (ioport_pin_is_low(IOPORT_PIN_BTN)) {
 			ioport_set_pin_low(IOPORT_PIN_LED);
 			ioport_set_pin_high(LED1_GPIO); // Button pressed
-			TCC0.CCA = 1;
+			TCC0.CCA = 2000;
 			}else{
 			ioport_set_pin_high(IOPORT_PIN_LED); // Button released
 			ioport_set_pin_low(LED1_GPIO);

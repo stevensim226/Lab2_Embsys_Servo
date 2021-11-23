@@ -3,31 +3,31 @@ Lab2_Embsys_Servo_v2.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         0000042e  00000000  00000000  00000054  2**1
+  0 .text         00000426  00000000  00000000  00000054  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         00000000  00802000  00802000  00000482  2**0
+  1 .data         00000000  00802000  00802000  0000047a  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .comment      00000030  00000000  00000000  00000482  2**0
+  2 .comment      00000030  00000000  00000000  0000047a  2**0
                   CONTENTS, READONLY
-  3 .note.gnu.avr.deviceinfo 00000044  00000000  00000000  000004b4  2**2
+  3 .note.gnu.avr.deviceinfo 00000044  00000000  00000000  000004ac  2**2
                   CONTENTS, READONLY
-  4 .debug_aranges 00000068  00000000  00000000  000004f8  2**0
+  4 .debug_aranges 00000068  00000000  00000000  000004f0  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   00004a2e  00000000  00000000  00000560  2**0
+  5 .debug_info   00004a2e  00000000  00000000  00000558  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 000034f3  00000000  00000000  00004f8e  2**0
+  6 .debug_abbrev 000034f3  00000000  00000000  00004f86  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   000016fe  00000000  00000000  00008481  2**0
+  7 .debug_line   000016f6  00000000  00000000  00008479  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  00000088  00000000  00000000  00009b80  2**2
+  8 .debug_frame  00000088  00000000  00000000  00009b70  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    0003104d  00000000  00000000  00009c08  2**0
+  9 .debug_str    000310a6  00000000  00000000  00009bf8  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    00000519  00000000  00000000  0003ac55  2**0
+ 10 .debug_loc    00000519  00000000  00000000  0003ac9e  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 00000080  00000000  00000000  0003b16e  2**0
+ 11 .debug_ranges 00000080  00000000  00000000  0003b1b7  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_macro  00000bd1  00000000  00000000  0003b1ee  2**0
+ 12 .debug_macro  00000bd1  00000000  00000000  0003b237  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -302,7 +302,7 @@ Disassembly of section .text:
  20c:	10 e2       	ldi	r17, 0x20	; 32
  20e:	a0 e0       	ldi	r26, 0x00	; 0
  210:	b0 e2       	ldi	r27, 0x20	; 32
- 212:	ee e2       	ldi	r30, 0x2E	; 46
+ 212:	e6 e2       	ldi	r30, 0x26	; 38
  214:	f4 e0       	ldi	r31, 0x04	; 4
  216:	00 e0       	ldi	r16, 0x00	; 0
  218:	0b bf       	out	0x3b, r16	; 59
@@ -326,8 +326,8 @@ Disassembly of section .text:
  230:	a0 30       	cpi	r26, 0x00	; 0
  232:	b2 07       	cpc	r27, r18
  234:	e1 f7       	brne	.-8      	; 0x22e <.do_clear_bss_loop>
- 236:	da d0       	rcall	.+436    	; 0x3ec <main>
- 238:	f8 c0       	rjmp	.+496    	; 0x42a <_exit>
+ 236:	d6 d0       	rcall	.+428    	; 0x3e4 <main>
+ 238:	f4 c0       	rjmp	.+488    	; 0x422 <_exit>
 
 0000023a <__bad_interrupt>:
  23a:	e2 ce       	rjmp	.-572    	; 0x0 <__vectors>
@@ -608,116 +608,109 @@ void PWM_Init(void)
  3dc:	9e e3       	ldi	r25, 0x3E	; 62
  3de:	86 a3       	std	Z+38, r24	; 0x26
  3e0:	97 a3       	std	Z+39, r25	; 0x27
+ 3e2:	08 95       	ret
 
-	/* Set Compare Register value*/
-	TCC0.CCA = 1500;
- 3e2:	8c ed       	ldi	r24, 0xDC	; 220
- 3e4:	95 e0       	ldi	r25, 0x05	; 5
- 3e6:	80 a7       	std	Z+40, r24	; 0x28
- 3e8:	91 a7       	std	Z+41, r25	; 0x29
- 3ea:	08 95       	ret
-
-000003ec <main>:
+000003e4 <main>:
 
 int main (void)
 {
 	/* Insert system clock initialization code here (sysclk_init()). */
 
 	board_init();
- 3ec:	4e df       	rcall	.-356    	; 0x28a <board_init>
+ 3e4:	52 df       	rcall	.-348    	; 0x28a <board_init>
 	PWM_Init();
- 3ee:	ea df       	rcall	.-44     	; 0x3c4 <PWM_Init>
- 3f0:	c0 e8       	ldi	r28, 0x80	; 128
+ 3e6:	ee df       	rcall	.-36     	; 0x3c4 <PWM_Init>
+ 3e8:	c0 e8       	ldi	r28, 0x80	; 128
 
 __always_inline static bool arch_ioport_get_pin_level(ioport_pin_t pin)
 {
 	PORT_t *base = arch_ioport_pin_to_base(pin);
 
 	return base->IN & arch_ioport_pin_to_mask(pin);
- 3f2:	d6 e0       	ldi	r29, 0x06	; 6
- 3f4:	e0 ee       	ldi	r30, 0xE0	; 224
+ 3ea:	d6 e0       	ldi	r29, 0x06	; 6
+ 3ec:	e0 ee       	ldi	r30, 0xE0	; 224
 		bool level)
 {
 	PORT_t *base = arch_ioport_pin_to_base(pin);
 
 	if (level) {
 		base->OUTSET = arch_ioport_pin_to_mask(pin);
- 3f6:	f7 e0       	ldi	r31, 0x07	; 7
- 3f8:	21 e0       	ldi	r18, 0x01	; 1
- 3fa:	92 e0       	ldi	r25, 0x02	; 2
+ 3ee:	f7 e0       	ldi	r31, 0x07	; 7
+ 3f0:	21 e0       	ldi	r18, 0x01	; 1
+ 3f2:	92 e0       	ldi	r25, 0x02	; 2
 	} else {
 		base->OUTCLR = arch_ioport_pin_to_mask(pin);
- 3fc:	a0 e0       	ldi	r26, 0x00	; 0
+ 3f4:	a0 e0       	ldi	r26, 0x00	; 0
 			ioport_set_pin_high(LED1_GPIO); // Button pressed
-			TCC0.CCA = 1;
+			TCC0.CCA = 2000;
 			}else{
 			ioport_set_pin_high(IOPORT_PIN_LED); // Button released
 			ioport_set_pin_low(LED1_GPIO);
 			TCC0.CCA = 8000;
- 3fe:	b8 e0       	ldi	r27, 0x08	; 8
- 400:	60 e4       	ldi	r22, 0x40	; 64
- 402:	7f e1       	ldi	r23, 0x1F	; 31
- 404:	41 e0       	ldi	r20, 0x01	; 1
+ 3f6:	b8 e0       	ldi	r27, 0x08	; 8
+ 3f8:	60 e4       	ldi	r22, 0x40	; 64
+ 3fa:	7f e1       	ldi	r23, 0x1F	; 31
+ 3fc:	40 ed       	ldi	r20, 0xD0	; 208
 	{
 		
 		if (ioport_pin_is_low(IOPORT_PIN_BTN)) {
 			ioport_set_pin_low(IOPORT_PIN_LED);
 			ioport_set_pin_high(LED1_GPIO); // Button pressed
-			TCC0.CCA = 1;
- 406:	50 e0       	ldi	r21, 0x00	; 0
- 408:	88 85       	ldd	r24, Y+8	; 0x08
+			TCC0.CCA = 2000;
+ 3fe:	57 e0       	ldi	r21, 0x07	; 7
+ 400:	88 85       	ldd	r24, Y+8	; 0x08
 
 __always_inline static bool arch_ioport_get_pin_level(ioport_pin_t pin)
 {
 	PORT_t *base = arch_ioport_pin_to_base(pin);
 
 	return base->IN & arch_ioport_pin_to_mask(pin);
- 40a:	85 fd       	sbrc	r24, 5
+ 402:	85 fd       	sbrc	r24, 5
 	#define IOPORT_PIN_LED LED0_GPIO
 	#define IOPORT_PIN_BTN GPIO_PUSH_BUTTON_0
 	while(1)
 	{
 		
 		if (ioport_pin_is_low(IOPORT_PIN_BTN)) {
- 40c:	07 c0       	rjmp	.+14     	; 0x41c <__LOCK_REGION_LENGTH__+0x1c>
- 40e:	26 83       	std	Z+6, r18	; 0x06
+ 404:	07 c0       	rjmp	.+14     	; 0x414 <__LOCK_REGION_LENGTH__+0x14>
+ 406:	26 83       	std	Z+6, r18	; 0x06
 	PORT_t *base = arch_ioport_pin_to_base(pin);
 
 	if (level) {
 		base->OUTSET = arch_ioport_pin_to_mask(pin);
 	} else {
 		base->OUTCLR = arch_ioport_pin_to_mask(pin);
- 410:	95 83       	std	Z+5, r25	; 0x05
+ 408:	95 83       	std	Z+5, r25	; 0x05
 		bool level)
 {
 	PORT_t *base = arch_ioport_pin_to_base(pin);
 
 	if (level) {
 		base->OUTSET = arch_ioport_pin_to_mask(pin);
- 412:	98 96       	adiw	r26, 0x28	; 40
+ 40a:	98 96       	adiw	r26, 0x28	; 40
 			ioport_set_pin_low(IOPORT_PIN_LED);
 			ioport_set_pin_high(LED1_GPIO); // Button pressed
-			TCC0.CCA = 1;
- 414:	4d 93       	st	X+, r20
- 416:	5c 93       	st	X, r21
- 418:	99 97       	sbiw	r26, 0x29	; 41
- 41a:	f6 cf       	rjmp	.-20     	; 0x408 <__LOCK_REGION_LENGTH__+0x8>
- 41c:	25 83       	std	Z+5, r18	; 0x05
- 41e:	96 83       	std	Z+6, r25	; 0x06
+			TCC0.CCA = 2000;
+ 40c:	4d 93       	st	X+, r20
+ 40e:	5c 93       	st	X, r21
+ 410:	99 97       	sbiw	r26, 0x29	; 41
+ 412:	f6 cf       	rjmp	.-20     	; 0x400 <__LOCK_REGION_LENGTH__>
+ 414:	25 83       	std	Z+5, r18	; 0x05
+ 416:	96 83       	std	Z+6, r25	; 0x06
 	} else {
 		base->OUTCLR = arch_ioport_pin_to_mask(pin);
- 420:	98 96       	adiw	r26, 0x28	; 40
+ 418:	98 96       	adiw	r26, 0x28	; 40
 			}else{
 			ioport_set_pin_high(IOPORT_PIN_LED); // Button released
 			ioport_set_pin_low(LED1_GPIO);
 			TCC0.CCA = 8000;
- 422:	6d 93       	st	X+, r22
- 424:	7c 93       	st	X, r23
- 426:	99 97       	sbiw	r26, 0x29	; 41
- 428:	ef cf       	rjmp	.-34     	; 0x408 <__LOCK_REGION_LENGTH__+0x8>
+ 41a:	6d 93       	st	X+, r22
+ 41c:	7c 93       	st	X, r23
+ 41e:	99 97       	sbiw	r26, 0x29	; 41
+ 420:	ef cf       	rjmp	.-34     	; 0x400 <__LOCK_REGION_LENGTH__>
 
-0000042a <_exit>:
- 42a:	f8 94       	cli
+00000422 <_exit>:
+ 422:	f8 94       	cli
 
-0000042c <__stop_program>:
- 42c:	ff cf       	rjmp	.-2      	; 0x42c <__stop_program>
+00000424 <__stop_program>:
+ 424:	ff cf       	rjmp	.-2      	; 0x424 <__stop_program>
